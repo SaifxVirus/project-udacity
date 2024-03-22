@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kidCalc</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/theme1.css">
+  <link rel="stylesheet" href="assets/theme2.css">
+  <link rel="stylesheet" href="assets/theme3.css">
+  <link rel="stylesheet" href="assets/theme4.css">
+  <link rel="stylesheet" href="assets/theme5.css">
+  <link rel="stylesheet" href="assets/theme6.css">
+  <script>
+    let displayValue = '';
+  
+    function appendToDisplay(value) {
+      displayValue += value;
+      document.getElementById('display').value = displayValue;
+    }
+  
+    function clearDisplay() {
+      displayValue = '';
+      document.getElementById('display').value = '';
+    }
+  
+    function calculate() {
+      try {
+        const result = eval(displayValue);
+        displayValue = result.toString();
+        document.getElementById('display').value = displayValue;
+      } catch (error) {
+        displayValue = '';
+        document.getElementById('display').value = 'Error';
+      }
+    }
+    function changeTheme() {
+    const selectedTheme = document.getElementById('theme').value;
+    const links = document.querySelectorAll('link[rel="stylesheet"]');
+    
+    links.forEach(link => {
+      if (link.href.includes('theme')) {
+        link.disabled = !link.href.includes(selectedTheme);
+      }
+    });
+  }
+  </script>
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <nav>
+
+    <a href="index.html" class="nav-link nav-hide">Home</a>
+    <div class="nav-sidebar">
+        <div class="sidebar-pages">
+            <a href="/index.html" class="nav-link">Home</a>
+
+        </div>
+    </nav>
+    <section id="login-section">
+      <h2>Login Form</h2>
+      <form id="login-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required>
+        <label for="theme">Choose Theme:</label>
+        <select id="theme" name="theme" onchange="changeTheme()">
+          <option value="theme1">Space1</option>
+          <option value="theme2">Space2</option>
+          <option value="theme3">Dino1</option>
+          <option value="theme4">Dino2</option>
+          <option value="theme5">Cars1</option>
+          <option value="theme6">Cars2</option>
+        </select>
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <section id="kidcalc-section">
+      <h2>kidCalc</h2>
+        <div id="calculator">
+          <input type="text" id="display" disabled>
+          <div class="buttons">
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="clearDisplay()">C</button>
+          </div>
+        </div>
+      </section>
+
+
+    <section id="info-bar">
+      <p id="info-message">login to start practicing.</p>
+    </section>
+  </div>
+</body>
+
+</html>
